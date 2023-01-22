@@ -6,8 +6,18 @@
 //
 
 import SwiftUI
-
+// : - specifies some view protocol to conform to and View is the protocol it has to follow
+// witht the View protocol we have to have a body that returns some View
+// i.e it can have any datatype that conforms to the view property
 struct ContentView: View {
+    
+    @State private var playerCard = "card2"
+    @State private var cpuCard = "card3"
+    @State private var playerScore = 0
+    @State private var cpuScore = 0
+    
+    
+    
     var body: some View {
         ZStack{
             
@@ -16,31 +26,38 @@ struct ContentView: View {
             VStack{
                 
                 Spacer()
-                
                 Image("logo")
-                
                 Spacer()
                 
                 HStack{
-                    
                     Spacer()
-                    
-                    Image("card2")
-                    
+                    Image(playerCard)
                     Spacer()
-                    Image("card3")
+                    Image(cpuCard)
                     Spacer()
-                    
                 }
                 
                 Spacer()
                 
-                Image("dealbutton")
+                Button(action: {
+                    
+                    // generate random number between 2 and 14
+                    let playerRand =    Int.random(in: 2...14)
+                    let cpuRand =    Int.random(in: 2...14)
+                    
+                    // update players cards
+                    playerCard = "card" + String(playerRand)
+                    cpuCard = "card" + String(cpuRand)
+                    
+                    
+                }, label: {
+                    Image("dealbutton")
+                    }
+                )
                 
                 Spacer()
                 
                 HStack{
-                    
                     Spacer()
                     
                     VStack{
@@ -49,9 +66,7 @@ struct ContentView: View {
                             .foregroundColor(Color.white)
                             .padding(.bottom, 5.0)
                         
-                        
-                        
-                        Text("0")
+                        Text(String(playerScore))
                             .font(.largeTitle)
                             .foregroundColor(Color.white)
                     }
@@ -64,24 +79,15 @@ struct ContentView: View {
                             .foregroundColor(Color.white)
                             .padding(.bottom, 5.0)
                         
-                        
-                        
-                        Text("0")
+                        Text(String(cpuScore))
                             .font(.largeTitle)
                             .foregroundColor(Color.white)
                     }
-                    
                     Spacer()
                     
                 }
-                
                 Spacer()
-                
-                
-                
             }
-            
-            
         }
     }
     
